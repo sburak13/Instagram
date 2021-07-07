@@ -15,6 +15,7 @@
 @interface HomeFeedViewController ()
 
 @property (nonatomic) NSMutableArray *postsArray;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -27,6 +28,10 @@
     self.feedTableView.delegate = self;
     
     [self loadPosts];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadPosts) forControlEvents:UIControlEventValueChanged];
+    [self.feedTableView insertSubview:self.refreshControl atIndex: 0];
     
 }
 
@@ -43,12 +48,36 @@
             // do something with the data fetched
             self.postsArray = posts;
             [self.feedTableView reloadData];
+            [self.refreshControl endRefreshing];
         }
         else {
             // handle error
             NSLog(@"%@", error.localizedDescription);
         }
     }];
+}
+
+- (void)beginRefresh:(UIRefreshControl *)refreshControl {
+        // Create NSURL and NSURLRequest
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
+                                                              delegate:nil
+                                                         delegateQueue:[NSOperationQueue mainQueue]];
+        session.configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    
+        NSURLSessionDataTask *task = [session dataTaskWithRequest:self.postsArray
+                                                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    
+           // ... Use the new data to update the data source ...
+
+           // Reload the tableView now that there is new data
+            [self.feedTableView reloadData];
+
+           // Tell the refreshControl to stop spinning
+            [refreshControl endRefreshing];
+
+        }];
+    
+        [task resume];
 }
 
 
