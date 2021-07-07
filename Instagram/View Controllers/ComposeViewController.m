@@ -10,6 +10,9 @@
 
 @interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIImageView *composeImageView;
+@property (weak, nonatomic) IBOutlet UITextField *captionTextField;
+
 @end
 
 @implementation ComposeViewController 
@@ -18,6 +21,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.captionTextField.placeholder = @"Write a caption...";
+    
+}
+
+
+
+- (IBAction)didTapImageView:(UITapGestureRecognizer *)sender {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
