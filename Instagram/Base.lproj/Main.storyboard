@@ -87,6 +87,15 @@
                     <view key="view" contentMode="scaleToFill" id="WeD-nl-dRp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RYd-yv-bqc">
+                                <rect key="frame" x="207" y="159" width="46" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="NTA-Nh-heo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
@@ -111,7 +120,7 @@
         <!--Navigation Controller-->
         <scene sceneID="2Ia-QI-V1q">
             <objects>
-                <navigationController storyboardIdentifier="AuthenticatedViewController" automaticallyAdjustsScrollViewInsets="NO" id="thc-q0-Ogy" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNavViewController" automaticallyAdjustsScrollViewInsets="NO" id="thc-q0-Ogy" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oxH-Zj-6an">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -152,7 +161,18 @@
                         <viewLayoutGuide key="safeArea" id="aUz-j5-vfp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="4md-Qp-rQg"/>
+                    <navigationItem key="navigationItem" id="4md-Qp-rQg">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="akn-zd-YKv">
+                            <connections>
+                                <action selector="didTapCancel:" destination="fS9-Gi-hhl" id="9nR-Dz-ytK"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="DZx-HC-c2b">
+                            <connections>
+                                <action selector="didTapShare:" destination="fS9-Gi-hhl" id="rvO-TN-JM6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="captionTextField" destination="GDh-iB-JoY" id="OyF-69-G2U"/>
                         <outlet property="composeImageView" destination="WBz-Hi-Q5N" id="P99-fE-Yt4"/>

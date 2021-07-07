@@ -6,7 +6,9 @@
 //
 
 #import "ComposeViewController.h"
-
+#import "SceneDelegate.h"
+#import "HomeFeedViewController.h"
+#import "Post.h"
 
 @interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -22,10 +24,7 @@
     // Do any additional setup after loading the view.
     
     self.captionTextField.placeholder = @"Write a caption...";
-    
 }
-
-
 
 - (IBAction)didTapImageView:(UITapGestureRecognizer *)sender {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
@@ -44,6 +43,74 @@
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    // Get the image captured by the UIImagePickerController
+    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+
+    // Do something with the images (based on your use case)
+    self.composeImageView.image = editedImage;
+    
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)didTapCancel:(id)sender {
+    [self goToHomeFeed];
+}
+
+
+- (IBAction)didTapShare:(id)sender {
+    
+    UIImage *resizedImage = [self resizeImage:self.composeImageView.image withSize: CGSizeMake(250, 250)];
+                                                        
+    [Post postUserImage:resizedImage withCaption:self.captionTextField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        
+        if (succeeded) {
+            NSLog(@"Succesfully shared image");
+            [self goToHomeFeed];
+            
+        } else {
+            UIAlertController *shareAlert = [UIAlertController alertControllerWithTitle:@"Could Not Share"
+                                                                               message: [@"Error: " stringByAppendingString:error.localizedDescription]
+                                                           preferredStyle:(UIAlertControllerStyleAlert)];
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * _Nonnull action) {}];
+            [shareAlert addAction:okAction];
+        }
+    }];
+    
+}
+
+- (void)goToHomeFeed {
+    self.composeImageView.image = nil;
+    self.captionTextField.text = @"";
+    
+    SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    // Remember to set the Storyboard ID to LoginViewController
+    HomeFeedViewController *homeFeedViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeNavViewController"];
+    sceneDelegate.window.rootViewController = homeFeedViewController;
+}
+
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+
 /*
 #pragma mark - Navigation
 
@@ -54,16 +121,5 @@
 }
 */
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
-    // Get the image captured by the UIImagePickerController
-    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-
-    // Do something with the images (based on your use case)
-    
-    // Dismiss UIImagePickerController to go back to your original view controller
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 @end
