@@ -25,11 +25,19 @@
 - (void)setPost:(Post *)post {
     _post = post;
     
+    self.postImageView.file = post.image;
+    [self.postImageView loadInBackground];
+    
+    self.usernameLabel.text = post.author.username;
+    self.captionLabel.text = post.caption;
+    
+    /*
     self.postImageView.file = post[@"image"];
     [self.postImageView loadInBackground];
     
     self.usernameLabel.text = post[@"author"][@"username"];
     self.captionLabel.text = post[@"caption"];
+     */
 }
 
 
