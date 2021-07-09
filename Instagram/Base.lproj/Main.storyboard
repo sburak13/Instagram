@@ -472,7 +472,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Change Profile Picture"/>
                                                 <connections>
-                                                    <action selector="tapChangProfilePic:" destination="mBq-pa-VUh" eventType="touchUpInside" id="1fZ-Kn-fbx"/>
+                                                    <action selector="tapChangeProfilePic:" destination="mBq-pa-VUh" eventType="touchUpInside" id="YGk-oZ-ohq"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WtD-Ri-7It">
