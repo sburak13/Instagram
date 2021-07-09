@@ -8,6 +8,7 @@
 #import "PostCell.h"
 #import <Parse/Parse.h>
 #import "Post.h"
+#import "DateTools/DateTools.h"
 
 @implementation PostCell
 
@@ -31,13 +32,9 @@
     self.usernameLabel.text = post.author.username;
     self.captionLabel.text = post.caption;
     
-    /*
-    self.postImageView.file = post[@"image"];
-    [self.postImageView loadInBackground];
+    NSDate *createdAt = post.createdAt;
+    self.timeLabel.text = createdAt.timeAgoSinceNow;
     
-    self.usernameLabel.text = post[@"author"][@"username"];
-    self.captionLabel.text = post[@"caption"];
-     */
 }
 
 

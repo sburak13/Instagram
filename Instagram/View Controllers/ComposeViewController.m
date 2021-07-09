@@ -9,6 +9,7 @@
 #import "SceneDelegate.h"
 #import "HomeFeedViewController.h"
 #import "Post.h"
+#import "ImgUtils.h"
 
 @interface ComposeViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -50,7 +51,8 @@
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
 
     // Do something with the images (based on your use case)
-    self.composeImageView.image = editedImage;
+    UIImage *resizedImg = [ImgUtils resizeImage:editedImage withSize:CGSizeMake(300, 300)];
+    self.composeImageView.image = resizedImg;
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];

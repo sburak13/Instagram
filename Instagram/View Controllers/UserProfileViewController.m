@@ -33,8 +33,8 @@
     [super viewDidLoad];
     
     CGFloat contentWidth = self.profileScrollView.bounds.size.width;
-        CGFloat contentHeight = self.profileScrollView.bounds.size.height * 3;
-        self.profileScrollView.contentSize = CGSizeMake(contentWidth, contentHeight);
+    CGFloat contentHeight = self.profileScrollView.bounds.size.height * 3;
+    self.profileScrollView.contentSize = CGSizeMake(contentWidth, contentHeight);
     
     PFUser *currentUser = [PFUser currentUser];
     self.usernameLabel.text = currentUser.username;
