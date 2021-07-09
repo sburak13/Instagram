@@ -8,6 +8,7 @@
 #import "SignUpViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Parse/Parse.h>
+#import "Post.h"
 
 
 @interface SignUpViewController ()
@@ -15,7 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextView *bioTextView;
+@property (weak, nonatomic) IBOutlet UITextField *bioTextField;
+
 
 @property UIAlertController *signupAlert;
 
@@ -29,10 +31,7 @@
     self.usernameTextField.placeholder = @"Username";
     self.passwordTextField.placeholder = @"Password";
     self.nameTextField.placeholder = @"Name";
-    
-    [[self.bioTextView layer] setBorderColor:[[UIColor grayColor] CGColor]];
-    [[self.bioTextView layer] setBorderWidth:2.3];
-    [[self.bioTextView layer] setCornerRadius:15];
+    self.bioTextField.placeholder = @"Bio";
     
     self.signupAlert = [UIAlertController alertControllerWithTitle:@"Invalid Sign Up"
                                                           message:@"message"
@@ -63,8 +62,6 @@
         // set user properties
         newUser.username = self.usernameTextField.text;
         newUser.password = self.passwordTextField.text;
-        // newUser.name = self.nameTextField.text;
-        // newUser.bio = self.bioTextView.text;
         
         // call sign up function on the object
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
@@ -75,9 +72,16 @@
                 [self presentViewController:self.signupAlert animated:YES completion:^{}];
             } else {
                 NSLog(@"User registered successfully");
-                
-                // manually segue to logged in view
-                [self performSegueWithIdentifier:@"signUpSegue" sender:nil];
+                [newUser setObject:self.nameTextField.text forKey:@"name"];
+                [newUser setObject:self.bioTextField.text forKey:@"bio"];
+                [newUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if(error){
+                        NSLog(@"Error: %@", error.localizedDescription);
+                    }else{
+                        // manually segue to logged in view
+                        [self performSegueWithIdentifier:@"signUpSegue" sender:nil];
+                    }
+                }];
             }
         }];
     }
