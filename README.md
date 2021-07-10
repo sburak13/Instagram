@@ -56,14 +56,14 @@ Here's a walkthrough of implemented user stories:
 
 - User can take a photo, add a caption, and post it to "Instagram"
 
-![](https://i.imgur.com/HG4YTxO.gif)
+![](https://i.imgur.com/lP980CT.gif)
 
 
 - User can view the last 20 posts submitted to "Instagram"
 - User can pull to refresh the last 20 posts submitted to "Instagram"
 - Show the username and creation time for each post
 
-![](https://i.imgur.com/2yoiXIN.gif)
+![](https://i.imgur.com/zuKMOos.gif)
 
 
 - User can tap a post to view post details, including timestamp and caption.
@@ -75,7 +75,7 @@ Here's a walkthrough of implemented user stories:
 - User Profiles:
     - Allow the logged in user to add a profile photo
 
-![](https://i.imgur.com/uLS0Sro.gif)
+![](https://i.imgur.com/dhItwm3.gif)
 
 
 ## Credits
