@@ -45,7 +45,6 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
@@ -64,7 +63,6 @@
 
 
 - (IBAction)didTapShare:(id)sender {
-    
     UIImage *resizedImage = [self resizeImage:self.composeImageView.image withSize: CGSizeMake(250, 250)];
                                                         
     [Post postUserImage:resizedImage withCaption:self.captionTextField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
@@ -83,7 +81,6 @@
             [shareAlert addAction:okAction];
         }
     }];
-    
 }
 
 - (void)goToHomeFeed {
@@ -112,7 +109,6 @@
     return newImage;
 }
 
-
 /*
 #pragma mark - Navigation
 
@@ -122,6 +118,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
 
 @end

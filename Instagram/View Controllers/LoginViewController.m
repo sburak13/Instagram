@@ -9,6 +9,7 @@
 #import <Parse/Parse.h>
 
 @interface LoginViewController ()
+
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property UIAlertController *loginAlert;
@@ -30,7 +31,6 @@
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {}];
     [self.loginAlert addAction:okAction];
-    
 }
 
 - (IBAction)didTapLogin:(id)sender {
@@ -62,43 +62,9 @@
     [self performSegueWithIdentifier:@"registerSegue" sender:nil];
 }
 
-/*
-- (void)registerUser {
-    self.loginAlert.title = @"Invalid Sign Up";
-    
-    if ([self.usernameTextField.text isEqual:@""] || [self.passwordTextField.text isEqual:@""]) {
-        self.loginAlert.message = @"Username or Password field is blank.";
-        [self presentViewController:self.loginAlert animated:YES completion:^{}];
-    } else {
-        // initialize a user object
-        PFUser *newUser = [PFUser user];
-        
-        // set user properties
-        newUser.username = self.usernameTextField.text;
-        newUser.password = self.passwordTextField.text;
-        
-        // call sign up function on the object
-        [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-            if (error != nil) {
-                NSLog(@"Error: %@", error.localizedDescription);
-                
-                self.loginAlert.message = [@"Error: " stringByAppendingString:error.localizedDescription];
-                [self presentViewController:self.loginAlert animated:YES completion:^{}];
-            } else {
-                NSLog(@"User registered successfully");
-                
-                // manually segue to logged in view
-                [self performSegueWithIdentifier:@"loginSegue" sender:nil];
-            }
-        }];
-    }
-}
-*/
-
 - (IBAction)didTapView:(id)sender {
     [self.view endEditing:true];
 }
-
 
 /*
 #pragma mark - Navigation

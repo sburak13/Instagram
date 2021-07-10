@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *bioTextField;
 
-
 @property UIAlertController *signupAlert;
 
 @end
@@ -40,7 +39,6 @@
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * _Nonnull action) {}];
     [self.signupAlert addAction:okAction];
-
 }
 
 

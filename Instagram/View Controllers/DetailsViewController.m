@@ -29,8 +29,6 @@
     
     NSDate *createdAt = self.post.createdAt;
     self.timeLabel.text = createdAt.timeAgoSinceNow;
-    
-    
 }
 
 /*

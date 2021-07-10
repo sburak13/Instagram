@@ -33,7 +33,6 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadPosts) forControlEvents:UIControlEventValueChanged];
     [self.feedTableView insertSubview:self.refreshControl atIndex: 0];
-    
 }
 
 - (void)loadPosts {
@@ -109,7 +108,6 @@
 
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    
     PostCell *cell = [self.feedTableView dequeueReusableCellWithIdentifier:@"com.samanthaburak.PostCell" forIndexPath:indexPath];
     Post *post = self.postsArray[indexPath.row];
     cell.post = post;
@@ -135,8 +133,6 @@
         DetailsViewController *detailsViewController = [segue destinationViewController];
         detailsViewController.post = post;
     }
-    
-    
 }
 
 @end

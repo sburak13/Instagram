@@ -23,8 +23,6 @@
 
 @property (nonatomic) NSMutableArray *postsArray;
 
-
-
 @end
 
 @implementation UserProfileViewController
@@ -61,9 +59,6 @@
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
     
     self.postsCollectionView.collectionViewLayout = layout;
-    
-
-    
 }
 
 - (void) getUserPosts {
@@ -86,27 +81,13 @@
 }
 
 - (IBAction)tapChangeProfilePic:(id)sender {
-    
     UIImagePickerController *imagePickerVC = [ImgUtils getImagePickerVC];
     imagePickerVC.delegate = self;
-    
-    /*
-    imagePickerVC.delegate = self;
-    imagePickerVC.allowsEditing = YES;
-    
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
-    else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-    */
+
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
@@ -136,17 +117,7 @@
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ProfilePostCell *cell = [self.postsCollectionView dequeueReusableCellWithReuseIdentifier:@"ProfilePostCell" forIndexPath:indexPath];
     Post *post = self.postsArray[indexPath.item];
-//    PFFileObject *img = post[@"image"];
-//    NSURL *urlString = [NSURL URLWithString:img.url];
-//    [cell.postImageView setImageWithURL:urlString];
-    // cell.postImageView = img get;
-    // [cell.postImageView setImageW];
-    
-    
-//    PFFileObject * profileImage = user[@"profile_image"]; // set your column name from Parse here
-//    NSURL * imageURL = [NSURL URLWithString:profileImage.url];
-//    [self.profileImageView setImageWithURL:imageURL];
-    
+
     cell.postImageView.file = post.image;
     [cell.postImageView loadInBackground];
     return cell;
